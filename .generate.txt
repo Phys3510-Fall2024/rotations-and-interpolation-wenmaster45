@@ -1,0 +1,12 @@
+f[x_] := Exp[-x/15] + Exp[-x/3]Sin[2\[Pi] x/1.391] + Exp[-x/5]Sin[2\[Pi] x/4.391]
+array = Table[{x,f[x]}//N,{x,0,25,0.01}];
+PaddedForm[TableForm[array],{12,12}];
+ListPlot[array]
+
+indicesToRemove = RandomSample[Range[Length[array]], 2100];
+
+(* Remove the selected pairs *)
+modifiedArray = Delete[array, List /@ indicesToRemove];
+
+(* Output the original and modified arrays *)
+ListLinePlot[{array,modifiedArray},PlotRange->All,InterpolationOrder->2]
